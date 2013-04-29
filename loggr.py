@@ -70,7 +70,7 @@ class FluentEvent:
     def Geo(self, lat, lon):
         self.e.geo = str(lat) + "," + str(lon)
         return self
-	def GeoIP(self, ip):
+    def GeoIP(self, ip):
         self.e.geo = "ip:" + ip
         return self
     def Post(self):
