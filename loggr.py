@@ -1,16 +1,16 @@
 import urllib
 import urllib2
 
-class Config:
+class Config(object):
     logKey = ""
     apiKey = ""
 
-class dataType:
+class DataType(object):
     html = 0
     plaintext = 1
     json = 2
     
-class Event:
+class Event(object):
     text = ''
     link = ''
     source = ''
@@ -18,15 +18,15 @@ class Event:
     tags = ''
     value = ''
     data = ''
-    dataType = dataType.plaintext
+    dataType = DataType.plaintext
     geo = ''
     
-class Events:
+class Events(object):
     @staticmethod
     def Create():
         return FluentEvent()
     
-class Users:
+class Users(object):
     @staticmethod
     def TrackUser(username, email, page):
         values = {}
@@ -41,7 +41,7 @@ class Users:
         req = urllib2.Request(url, data)
         response = urllib2.urlopen(req)
     
-class FluentEvent:
+class FluentEvent(object):
     e = Event()
     def Text(self, t):
         self.e.text = t
@@ -88,9 +88,9 @@ class FluentEvent:
         if self.e.value:
             values['value'] = self.e.value
         if self.e.data:
-            if self.e.dataType == dataType.html:
+            if self.e.dataType == DataType.html:
                 values['data'] = '@html\n' + str(self.e.data)
-            elif self.e.dataType == dataType.json:
+            elif self.e.dataType == DataType.json:
                 values['data'] = '@json\n' + str(self.e.data)
             else:
                 values['data'] = str(self.e.data)
